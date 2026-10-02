@@ -1,0 +1,52 @@
+[
+  {
+    "Town":"Pedro \/ Gbagada",
+    "Current Land Price\/sqm":"₦1200000\/sqm",
+    "Supporting Source":"FOR SALE | DIRECT SALES A prime 725sqm parcel of land ... | https:\/\/www.instagram.com\/p\/DZdNpqLDvS_\/",
+    "Date Searched":"2026-09-26",
+    "Indicative Market Level (₦\/sqm)":1200000.0,
+    "Indicative Market Level":"₦1,200,000 \/ sqm",
+    "Observations (n)":1,
+    "IQR Outlier Flag":true
+  },
+  {
+    "Town":"Aiyetoro \/ Mafowoku",
+    "Current Land Price\/sqm":"₦420000\/sqm",
+    "Supporting Source":"Land for Sale in Shomolu, Lagos | https:\/\/nigeriapropertycentre.com\/for-sale\/land\/lagos\/shomolu\/showtype?page=3",
+    "Date Searched":"2026-09-26",
+    "Indicative Market Level (₦\/sqm)":420000.0,
+    "Indicative Market Level":"₦420,000 \/ sqm",
+    "Observations (n)":1,
+    "IQR Outlier Flag":false
+  },
+  {
+    "Town":"Ibuowo \/ Owotutu",
+    "Current Land Price\/sqm":"₦415000\/sqm",
+    "Supporting Source":"Land for Sale in Shomolu, Lagos - Nigeria Property Centre | https:\/\/nigeriapropertycentre.com\/for-sale\/land\/lagos\/shomolu\/showtype?minprice=500000&page=2",
+    "Date Searched":"2026-09-26",
+    "Indicative Market Level (₦\/sqm)":415000.0,
+    "Indicative Market Level":"₦415,000 \/ sqm",
+    "Observations (n)":1,
+    "IQR Outlier Flag":false
+  },
+  {
+    "Town":"Ilaje",
+    "Current Land Price\/sqm":"₦320000\/sqm",
+    "Supporting Source":"Land for Sale in Bariga, Shomolu, Lagos | https:\/\/nigeriapropertycentre.com\/for-sale\/land\/lagos\/shomolu\/bariga\/showtype",
+    "Date Searched":"2026-09-26",
+    "Indicative Market Level (₦\/sqm)":320000.0,
+    "Indicative Market Level":"₦320,000 \/ sqm",
+    "Observations (n)":1,
+    "IQR Outlier Flag":false
+  },
+  {
+    "Town":"Owode \/ Orile Bariga",
+    "Current Land Price\/sqm":"₦250000\/sqm",
+    "Supporting Source":"Residential Land for Sale in Bariga, Shomolu, Lagos | https:\/\/nigeriapropertycentre.com\/for-sale\/land\/residential-land\/lagos\/shomolu\/bariga\/showtype",
+    "Date Searched":"2026-09-26",
+    "Indicative Market Level (₦\/sqm)":250000.0,
+    "Indicative Market Level":"₦250,000 \/ sqm",
+    "Observations (n)":1,
+    "IQR Outlier Flag":false
+  }
+]

@@ -1,39 +1,62 @@
-## Bariga Land Value Intelligence Project
+# Web-Based Land Value Intelligence Tool --- Bariga LCDA, Lagos
 
-This project is part of the GeoRAD Academy Emerging Spatial Professional
-mentorship technical sprint.
 
-The focus of Sprint 2 was to move from the spatial questions defined in
-Sprint 1 to actual market information by using an AI-assisted search
-workflow to investigate current land asking prices across five selected
-study areas in Bariga, Lagos.
+This project is a spatial analysis workflow for exploring **current land
+market asking-price signals** and, in later stages, comparing them with
+observed physical development change within selected areas of Bariga
+LCDA, Lagos.
 
-------------------------------------------------------------------------
+The work was completed progressively through the GeoRAD technical
+sprints. Sprint 1 established the spatial study areas, Sprint 2
+collected the market data, and Sprint 3 converted that market data into
+a spatial market-intelligence layer.
 
-## 1. Project Objective
-
-The objective of this sprint was to use an existing AI-enabled search
-workflow to investigate the current land market across five selected
-study areas and produce a simple, structured market dataset.
-
-The workflow was designed to return:
-
--   **Town** --- name of the assigned study area
--   **Current Land Price/sqm** --- an indicative asking-price level in
-    ₦/sqm
--   **Supporting Source** --- a source or listing supporting the
-    reported market information
--   **Date Searched** --- date on which the market search was conducted
-
-The results are intended as an indicative market signal and not as a
-formal property valuation or prediction of future land prices.
+> **Important:** The market figures in this project are indicative
+> asking-price signals. They are not formal property valuations,
+> confirmed transaction prices, or predictions of future land prices.
 
 ------------------------------------------------------------------------
 
-## 2. Study Areas
+# 1. Project Objective
 
-The five study areas used as inputs for the workflow were derived from
-the five selected ward polygons prepared during Sprint 1:
+The broader project is a **Web-based Land Value Intelligence Tool**
+designed to help users explore:
+
+1.  Current market range
+2.  Five-year development change
+3.  Development potential
+4.  Spatial differences between selected locations
+
+For the market-data component, the objective is to understand whether
+current land asking-price signals differ across selected areas of Bariga
+and to prepare the market layer for comparison with the
+physical-development signal in a later stage.
+
+The analysis does **not** attempt to determine which area is better or
+to predict future land prices.
+
+------------------------------------------------------------------------
+
+# 2. Study Area and Spatial Preparation --- Sprint 1
+
+The assigned LCDA was **Bariga**.
+
+The initial spatial exploration used GRID3 administrative and ward data.
+Because the available administrative structure represented the area
+through LGA and ward boundaries, Bariga had to be carefully separated
+from the wider Shomolu LGA.
+
+I filtered the ward data specifically to:
+
+-   `lganame = Shomolu`
+-   `statename = Lagos`
+
+I then identified the eight wards associated with Bariga and dissolved
+them to create a working Bariga LCDA boundary.
+
+For the technical sprint, the mentor later requested **polygon features
+instead of point locations**. I therefore selected five actual ward
+polygons:
 
 1.  Ibuowo / Owotutu
 2.  Ilaje
@@ -41,387 +64,342 @@ the five selected ward polygons prepared during Sprint 1:
 4.  Aiyetoro / Mafowoku
 5.  Owode / Orile Bariga
 
-The GeoJSON input used by the notebook was:
+The five wards were kept as **separate polygons** because each ward is
+treated as an individual study area.
 
-`bariga_selected_wards.geojson`
+### Tools used
 
-The notebook extracts the `wardname` attribute from these spatial
-features and uses the resulting names as the market-search inputs.
+-   QGIS
+-   GRID3 spatial data
+-   Google Maps
+-   GeoJSON
+-   Python/Google Colab
 
-------------------------------------------------------------------------
+One practical challenge was that OpenStreetMap tiles were not accessible
+in my environment, so I used Google Maps as the QGIS basemap.
 
-## 3. Problem the Notebook Solves
+A major lesson from Sprint 1 was that **place names alone are not enough
+when working with spatial data**. LGA, state and ward attributes had to
+be checked carefully to avoid selecting similarly named locations
+outside the study area.
 
-The notebook investigates the question:
+📷 **IMAGE INDICATION --- Insert `study_areas_map.png` here**
 
-> **What is the current asking price of residential land per square
-> metre in each selected study area?**
-
-Rather than manually searching for market information separately for
-each location, the notebook automates the search process using an
-AI-assisted Google search workflow.
-
-The workflow searches for relevant online market information, retrieves
-the available AI Overview, identifies market-price information and
-supporting references, and structures the results into a dataset that
-can be used in subsequent analysis.
-
-------------------------------------------------------------------------
-
-## 4. Tools and Technologies Used
-
-  -----------------------------------------------------------------------
-  Tool / Technology                   Purpose
-  ----------------------------------- -----------------------------------
-  **Google Colab**                    Running and adapting the provided
-                                      GeoRAD notebook
-
-  **Python**                          Processing the spatial inputs and
-                                      search results
-
-  **GeoJSON**                         Providing the five selected
-                                      study-area polygons
-
-  **SerpApi**                         Performing Google searches and
-                                      retrieving search/AI Overview
-                                      information
-
-  **Google AI Overview**              Providing an AI-assisted summary of
-                                      available market information
-
-  **Pandas**                          Structuring and exporting the
-                                      market dataset
-
-  **CSV / JSON**                      Storing the generated market
-                                      results
-  -----------------------------------------------------------------------
+*Suggested caption: Figure 1. Five selected ward polygons used as the
+technical-sprint study areas in Bariga LCDA.*
 
 ------------------------------------------------------------------------
 
-## 5. Input Data
+# 3. Spatial Questions to Market Data --- Sprint 2
 
-The main spatial input was:
+## 3.1 Purpose
 
-``` text
-bariga_selected_wards.geojson
-```
+Sprint 2 connected the selected spatial areas with current land-market
+information.
 
-This file contains the five selected ward polygons from the Bariga study
-area.
+For each selected ward, I collected:
 
-The workflow uses the `wardname` field to obtain the names of the study
-areas.
+-   Town/Ward
+-   Current Land Price/sqm
+-   Supporting Source
+-   Date Searched
 
-The five inputs were:
+The search question was adapted as:
 
-    \# Study Area
-  ---- ----------------------
-     1 Ibuowo / Owotutu
-     2 Ilaje
-     3 Pedro / Gbagada
-     4 Aiyetoro / Mafowoku
-     5 Owode / Orile Bariga
+> **"Current asking price of residential land per sqm in \[Town\],
+> Shomolu Lagos Nigeria"**
 
-------------------------------------------------------------------------
+The workflow used the GeoRAD Google Colab notebook and AI-assisted
+search results.
 
-## 6. Search Question
+## 3.2 Sprint 2 Market Dataset
 
-The starting market question supplied by GeoRAD was adapted for the
-selected locations.
+The resulting dataset contained one selected market-price signal for
+each study area:
 
-The customized search pattern used in the notebook was:
+  Study area               Current asking-price signal
+  ---------------------- -----------------------------
+  Ibuowo / Owotutu                        ₦415,000/sqm
+  Ilaje                                   ₦320,000/sqm
+  Pedro / Gbagada                       ₦1,200,000/sqm
+  Aiyetoro / Mafowoku                     ₦420,000/sqm
+  Owode / Orile Bariga                    ₦250,000/sqm
 
-``` text
-Current asking price of residential land per sqm in [Town], Shomolu Lagos Nigeria
-```
+These are the values carried forward into Sprint 3.
 
-The location name was inserted dynamically for each of the five study
-areas.
+The original AI-assisted search sometimes returned **ranges** rather
+than one value. The structured Sprint 2 dataset contains one selected
+value per study area, so these values should not be interpreted as exact
+averages of all available listings.
 
-------------------------------------------------------------------------
+## 3.3 Supporting Evidence
 
-## 7. How the Workflow Works
+The market search used sources including Nigeria Property Centre and,
+for the Pedro/Gbagada observation, an Instagram property listing
+referenced by the AI-assisted search.
 
-The workflow can be summarized as:
+The supporting source and search date were retained in the dataset so
+that each market observation can be traced back to its original Sprint 2
+evidence.
 
-``` text
-Five selected ward polygons
-          ↓
-Load GeoJSON
-          ↓
-Read the wardname field
-          ↓
-Generate a market-search question
-          ↓
-Search Google through SerpApi
-          ↓
-Retrieve available AI Overview
-          ↓
-Extract market-price information
-          ↓
-Collect supporting references
-          ↓
-Record search date
-          ↓
-Generate structured market dataset
-```
+## 3.4 Challenges Encountered
 
-The notebook processes the five study areas and produces structured
-results containing the town, indicative price, supporting source and
-search date.
+Two main technical problems occurred during Sprint 2:
 
-------------------------------------------------------------------------
+### Working-directory error
 
-## 8. Generated Market Dataset
+I initially used an incorrect folder path in Google Colab, which
+prevented the notebook from accessing the expected files. I corrected
+the path and continued the workflow.
 
-The completed workflow returned a market-price value for all five study
-areas.
+### Attribute-field mismatch
 
-  ------------------------------------------------------------------------
-  Study Area          Indicative Current Supporting       Date Searched
-                          Land Price/sqm Source           
-  ---------------- --------------------- ---------------- ----------------
-  Ibuowo / Owotutu          ₦415,000/sqm Nigeria Property 2026-09-26
-                                         Centre           
+The initial notebook expected a field named `ward`, while the actual
+GeoJSON used `wardname`.
 
-  Ilaje                     ₦320,000/sqm Nigeria Property 2026-09-26
-                                         Centre           
+After inspecting the GeoJSON structure, I changed the workflow to use
+`wardname` and reran the notebook successfully.
 
-  Pedro / Gbagada         ₦1,200,000/sqm Instagram        2026-09-26
-                                         listing          
+These issues reinforced the importance of inspecting the actual
+structure of spatial data instead of assuming that field names will
+always match the notebook.
 
-  Aiyetoro /                ₦420,000/sqm Nigeria Property 2026-09-26
-  Mafowoku                               Centre           
+## 3.5 Sprint 2 Learning
 
-  Owode / Orile             ₦250,000/sqm Nigeria Property 2026-09-26
-  Bariga                                 Centre           
-  ------------------------------------------------------------------------
+The exercise showed that AI can make market-data collection faster, but
+the results still require human inspection.
 
-The generated market dataset is available in both CSV and JSON formats.
+A simple question about land price can produce different answers
+depending on:
 
-### Important interpretation note
+-   exact location
+-   road accessibility
+-   plot size
+-   title documentation
+-   existing structures
+-   property type
+-   available listings
 
-The single price recorded in the generated dataset should not
-automatically be interpreted as the average price of all land in the
-study area.
+Therefore, the collected figures are treated as **indicative
+asking-price signals** rather than definitive market values.
 
-The underlying AI Overview often returned a **range of observed asking
-prices**, from which the generated workflow recorded a
-representative/upper value.
+📷 **IMAGE INDICATION --- Insert a screenshot of the Sprint 2 market
+dataset/table here**
 
-For example:
-
--   **Ibuowo / Owotutu:** the AI result reported approximately
-    ₦250,000--₦415,000/sqm.
--   **Ilaje:** approximately ₦200,000--₦320,000/sqm.
--   **Pedro / Gbagada:** approximately ₦200,000 to over ₦1,200,000/sqm.
--   **Aiyetoro / Mafowoku:** approximately ₦150,000--₦420,000/sqm.
--   **Owode / Orile Bariga:** approximately ₦95,000--₦250,000/sqm.
-
-These ranges show that land asking prices can vary considerably within
-the same study area.
+*Suggested caption: Figure 2. Structured market dataset generated during
+Sprint 2.*
 
 ------------------------------------------------------------------------
 
-## 9. Supporting Market Evidence
+# 4. From Market Data to Market Intelligence --- Sprint 3
 
-The AI-assisted search returned supporting references for the generated
-market information.
+Sprint 3 converted the Sprint 2 market observations into a spatial
+**Indicative Market Level** for each selected ward.
 
-Examples include:
+The customized notebook validates that the five expected wards are
+present, the required Sprint 2 columns exist, prices can be converted
+into numeric ₦/sqm values, and the market and spatial datasets contain
+the same study areas.
 
--   Nigeria Property Centre listings for land in Shomolu/Bariga
--   Jiji Nigeria property listings
--   Hutbay listings
--   Instagram property listings
--   Other online property sources returned through the search workflow
+Small formatting differences in ward names are normalized before the
+spatial join.
 
-For example, the Ilaje search returned a Nigeria Property Centre listing
-describing a 250 sqm parcel on Ilaje Road in Bariga at ₦80 million,
-which corresponds to approximately ₦320,000/sqm. The AI result also
-identified another larger redevelopment property at a lower approximate
-rate.
+## 4.1 Indicative Market Level
 
-The Pedro / Gbagada search returned several market references, including
-a listing indicating ₦200,000/sqm and other listings with substantially
-higher asking prices, demonstrating the variation within that broader
-area.
+Each ward has only **one Sprint 2 market observation**.
 
-------------------------------------------------------------------------
+Therefore:
 
-## 10. Issues Encountered During Setup
+> **Indicative Market Level = the Sprint 2 price for that ward.**
 
-### 10.1 Working Directory / Folder Path
+  Ward                     Indicative Market Level
+  ---------------------- -------------------------
+  Pedro / Gbagada                   ₦1,200,000/sqm
+  Aiyetoro / Mafowoku                 ₦420,000/sqm
+  Ibuowo / Owotutu                    ₦415,000/sqm
+  Ilaje                               ₦320,000/sqm
+  Owode / Orile Bariga                ₦250,000/sqm
 
-The first issue encountered was getting the Google Colab runtime to
-access the correct project folder.
+Because `n = 1` for every ward, these values should **not** be described
+as statistically robust ward-level market averages.
 
-The folder path was initially misspelled, which meant that the notebook
-could not correctly locate the working directory and required files.
+# 5. Market Comparison
 
-After checking the path and correcting the folder name, the notebook was
-able to access the required project files.
+Across the five observations:
 
-### 10.2 Incorrect Attribute Name
+-   **Mean:** ₦521,000/sqm
+-   **Median:** ₦415,000/sqm
+-   **Minimum:** ₦250,000/sqm
+-   **Maximum:** ₦1,200,000/sqm
+-   **Maximum/minimum ratio:** 4.8×
 
-The second issue occurred during the first run of the notebook.
+Ibuowo / Owotutu and Aiyetoro / Mafowoku are close in the observed
+asking-price signal. Ilaje and Owode / Orile Bariga are lower than the
+overall median, while Pedro / Gbagada is substantially higher than the
+other four observations.
 
-The original code referred to the location attribute as:
+These are descriptive comparisons only and do not establish why the
+differences exist.
 
-``` text
-ward
-```
+📷 **IMAGE INDICATION --- Insert `indicative_market_levels.png` here**
 
-However, the GeoJSON produced during Sprint 1 used:
+*Suggested caption: Figure 3. Comparison of indicative land market
+levels across the five selected Bariga wards.*
 
-``` text
-wardname
-```
+# 6. Unusual Observation --- Pedro / Gbagada
 
-Because of this mismatch, the initial run did not attach the study-area
-names correctly.
+The Sprint 3 notebook applies an **IQR outlier check** to screen for
+unusually high or low observations.
 
-After inspecting the structure of the GeoJSON output, I identified the
-correct field name and changed the extraction logic to use:
+Pedro / Gbagada is flagged as an unusually high observation relative to
+this small five-observation dataset.
 
-``` python
-feature.get("properties", {}).get("wardname")
-```
+This does **not** mean that the ₦1.2 million/sqm value is incorrect. The
+Sprint 2 search material showed substantial price variation around
+Pedro/Gbagada depending on micro-location, accessibility, title and
+property characteristics. The value is therefore treated as an
+observation that deserves further validation rather than being
+automatically removed.
 
-After this correction, the five study-area names were correctly
-extracted and passed into the market-search workflow.
+# 7. Spatial Market Intelligence
 
-------------------------------------------------------------------------
+The five indicative market levels were joined back to their
+corresponding ward polygons.
 
-## 11. Inspection and Experimentation
+The resulting map shows:
 
-The notebook was not treated as a black-box process. After the initial
-run, the generated output was inspected to check whether:
+-   Pedro / Gbagada --- ₦1.2m/sqm
+-   Aiyetoro / Mafowoku --- ₦420k/sqm
+-   Ibuowo / Owotutu --- ₦415k/sqm
+-   Ilaje --- ₦320k/sqm
+-   Owode / Orile Bariga --- ₦250k/sqm
 
--   all five study areas were processed;
--   each study area returned a market price;
--   the returned location matched the intended study area;
--   supporting sources were provided;
--   the price information was expressed in a usable unit;
--   any unexpected results or errors were present.
+📷 **IMAGE INDICATION --- Insert `bariga_market_intelligence_map.png`
+here**
 
-The initial field-name problem was identified through this inspection
-process and corrected before the final run.
+*Suggested caption: Figure 4. Spatial distribution of indicative land
+market levels across the five selected Bariga wards.*
 
-The AI results were also examined to understand whether the returned
-price represented a range, a specific listing, or a broader market
-summary.
+An interactive version is also produced as
+`bariga_market_intelligence_map.html`.
 
-------------------------------------------------------------------------
+# 8. Sprint 3 Experiment
 
-## 12. Limitations
+Because each ward has only one observation, comparing the mean and
+median within each ward would not be meaningful.
 
-### Asking Prices Are Not Transaction Prices
+For the required experiment, I performed a hypothetical **+10%
+sensitivity test on Pedro / Gbagada**.
 
-The results are based on online **asking prices** rather than confirmed
-completed land transactions. They should therefore not be treated as
-actual sale prices.
+  Scenario                    Overall mean   Overall median
+  ------------------------- -------------- ----------------
+  Base dataset                ₦521,000/sqm     ₦415,000/sqm
+  Hypothetical Pedro +10%     ₦545,000/sqm     ₦415,000/sqm
 
-### Variation Within Study Areas
+The experiment shows that changing one high observation can affect the
+overall mean while the median remains unchanged when the middle-ranked
+observations are unchanged.
 
-Prices vary according to factors such as:
+The experiment is **hypothetical only** and does not represent an actual
+change in Pedro / Gbagada's market price.
 
--   road accessibility;
--   proximity to major roads;
--   plot size;
--   title documentation;
--   existing structures;
--   residential or commercial potential;
--   specific micro-location.
+# 9. Key Observations and Limitations
 
-Therefore, one price cannot fully represent every property within a
-ward.
+### Key observations
 
-### AI-Generated Summaries
+1.  The five study areas have different observed asking-price signals.
+2.  Pedro / Gbagada has the highest observed signal in this dataset.
+3.  Owode / Orile Bariga has the lowest observed signal.
+4.  Ibuowo / Owotutu and Aiyetoro / Mafowoku have very similar observed
+    values.
+5.  Pedro / Gbagada is flagged as an unusually high observation by the
+    IQR screening.
+6.  The overall mean is influenced by the high Pedro / Gbagada
+    observation.
 
-The AI Overview provides a useful way to discover and summarize market
-information, but the underlying listings remain important for
-verification.
+### Limitations
 
-### Online Data Availability
+1.  There is only one market observation per ward.
+2.  The values are asking prices, not confirmed transaction prices.
+3.  Asking prices can vary according to exact location, road access,
+    title, plot size, existing structures and other property
+    characteristics.
+4.  AI-assisted search results require human validation.
+5.  The IQR flag is a screening method and does not prove that an
+    observation is wrong.
+6.  Five observations are not enough to establish a statistically robust
+    ward-level market average.
+7.  This market analysis does not establish a causal relationship
+    between price and physical development.
+8.  More listings per ward would improve the reliability of the market
+    signal.
 
-The dataset only represents market information that was available and
-discoverable online at the time of the search. It does not represent
-every property listing in the five study areas.
+# 10. Project Outputs
 
-### Search Date
+### Spatial and market data
 
-Market asking prices can change. The results therefore include the date
-searched so that the dataset can be interpreted within its time context.
+-   `bariga_selected_wards.geojson` --- five selected ward polygons
+-   `market_dataset.csv` --- Sprint 2 market dataset
+-   `market_intelligence.csv` --- final Sprint 3 market-intelligence
+    dataset
+-   `market_intelligence.json` --- JSON version of the final Sprint 3
+    dataset
+-   `market_comparison.csv` --- market comparison statistics
+-   `experiment_sensitivity.csv` --- Sprint 3 experiment
 
-------------------------------------------------------------------------
+### Maps and visual outputs
 
-## 13. Output Files
+-   `study_areas_map.png` --- five-ward study-area map
+-   `indicative_market_levels.png` --- market-level comparison chart
+-   `bariga_market_intelligence_map.png` --- static spatial
+    market-intelligence map
+-   `bariga_market_intelligence_map.html` --- interactive
+    market-intelligence map
 
-The Sprint 2 workflow produced the following main outputs:
+### Notebooks
 
-``` text
-bariga_spatial_questions_to_market_data.ipynb
-market_dataset.csv
-market_dataset.json
-ai_overview_raw.json
-bariga_selected_wards.geojson
-```
+-   Sprint 2 market-data notebook
+-   Sprint 3 market-intelligence notebook
 
-### File descriptions
+# 11. Overall Learning
 
-  -------------------------------------------------------------------------------------
-  File                                              Description
-  ------------------------------------------------- -----------------------------------
-  `bariga_spatial_questions_to_market_data.ipynb`   Customized Colab notebook
-                                                    containing the Sprint 2 workflow
+The first three sprints showed me that spatial analysis is not only
+about creating maps. The main challenge is connecting spatial features
+with reliable information and making sure that the information being
+compared actually refers to the same locations.
 
-  `market_dataset.csv`                              Structured market dataset in CSV
-                                                    format
+Sprint 1 taught me to validate administrative boundaries and spatial
+attributes carefully.
 
-  `market_dataset.json`                             Structured market dataset in JSON
-                                                    format
+Sprint 2 showed me how market information can be collected and connected
+to spatial study areas, while also showing the limitations of
+AI-assisted market searches.
 
-  `ai_overview_raw.json`                            Raw AI Overview/search output and
-                                                    supporting references
+Sprint 3 took the collected market observations and turned them into a
+spatial market-intelligence layer that can be inspected, compared and
+mapped.
 
-  `bariga_selected_wards.geojson`                   Five selected ward polygons used as
-                                                    the spatial inputs
-  -------------------------------------------------------------------------------------
+The next stage of the project will introduce the **five-year
+physical-development signal** so that the market layer can eventually be
+considered alongside observed development change.
 
-------------------------------------------------------------------------
+# 12. Reproducibility
 
-## 14. Key Learning
+The Sprint 3 notebook is designed to run in Google Colab.
 
-The main lesson from this sprint was that AI-assisted workflows can help
-connect spatial information with non-spatial market information much
-faster than performing every search manually.
+To reproduce the analysis:
 
-However, automation does not remove the need for human checking. I had
-to inspect the spatial input, identify the incorrect `ward` field,
-correct it to `wardname`, and review whether the returned market
-information actually supported the generated values.
+1.  Open the Sprint 3 notebook.
+2.  Install the required Python packages.
+3.  Upload `bariga_selected_wards.geojson`.
+4.  Upload the Sprint 2 `market_dataset.csv`.
+5.  Run the notebook from top to bottom.
+6.  Inspect the validation and market-comparison outputs.
+7.  Inspect the outlier check.
+8.  Review the market-level chart and maps.
+9.  Review the sensitivity experiment.
+10. Download the generated files from `sprint3_outputs/`.
 
-The workflow also showed that a market question that appears simple ---
-such as the current price of land per square metre --- can produce a
-wide range of results because land prices depend heavily on the specific
-property and its location.
-
-This makes source checking and careful interpretation important when
-using AI-assisted market data for spatial analysis.
-
-------------------------------------------------------------------------
-
-## 15. Conclusion
-
-Sprint 2 successfully produced a structured indicative land-market
-dataset for the five selected study areas in Bariga.
-
-The workflow demonstrated how spatial features from the previous sprint
-can be connected to an AI-assisted web-search process to obtain current
-market information.
-
-The resulting dataset will provide the market-price component for
-subsequent stages of the Land Value Intelligence project, where it can
-be considered alongside other spatial indicators and the planned
-five-year development analysis.
+The notebook contains validation checks so that missing study areas,
+unexpected names, invalid prices or duplicate ward observations are
+identified rather than silently ignored.
