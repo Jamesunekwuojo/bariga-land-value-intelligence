@@ -83,7 +83,7 @@ when working with spatial data**. LGA, state and ward attributes had to
 be checked carefully to avoid selecting similarly named locations
 outside the study area.
 
-📷 **IMAGE INDICATION --- Insert `study_areas_map.png` here**
+![Map of the five selected ward polygons used as the technical-sprint study areas in Bariga LCDA](data/sprint3_outputs/study_areas_map.png)
 
 *Suggested caption: Figure 1. Five selected ward polygons used as the
 technical-sprint study areas in Bariga LCDA.*
@@ -117,13 +117,13 @@ search results.
 The resulting dataset contained one selected market-price signal for
 each study area:
 
-  Study area               Current asking-price signal
-  ---------------------- -----------------------------
-  Ibuowo / Owotutu                        ₦415,000/sqm
-  Ilaje                                   ₦320,000/sqm
-  Pedro / Gbagada                       ₦1,200,000/sqm
-  Aiyetoro / Mafowoku                     ₦420,000/sqm
-  Owode / Orile Bariga                    ₦250,000/sqm
+| Study area | Current asking-price signal |
+| --- | ---: |
+| Ibuowo / Owotutu | ₦415,000/sqm |
+| Ilaje | ₦320,000/sqm |
+| Pedro / Gbagada | ₦1,200,000/sqm |
+| Aiyetoro / Mafowoku | ₦420,000/sqm |
+| Owode / Orile Bariga | ₦250,000/sqm |
 
 These are the values carried forward into Sprint 3.
 
@@ -183,11 +183,17 @@ depending on:
 Therefore, the collected figures are treated as **indicative
 asking-price signals** rather than definitive market values.
 
-📷 **IMAGE INDICATION --- Insert a screenshot of the Sprint 2 market
-dataset/table here**
+The source table is available as [`market_dataset.csv`](data/sprint2_outputs/market_dataset.csv).
 
-*Suggested caption: Figure 2. Structured market dataset generated during
-Sprint 2.*
+| Study area | Asking price | Supporting source | Date searched |
+| --- | ---: | --- | --- |
+| Ibuowo / Owotutu | ₦415,000/sqm | [Nigeria Property Centre](https://nigeriapropertycentre.com/for-sale/land/lagos/shomolu/showtype?minprice=500000&page=2) | 2026-09-26 |
+| Ilaje | ₦320,000/sqm | [Nigeria Property Centre](https://nigeriapropertycentre.com/for-sale/land/lagos/shomolu/bariga/showtype) | 2026-09-26 |
+| Pedro / Gbagada | ₦1,200,000/sqm | [Instagram listing](https://www.instagram.com/p/DZdNpqLDvS_/) | 2026-09-26 |
+| Aiyetoro / Mafowoku | ₦420,000/sqm | [Nigeria Property Centre](https://nigeriapropertycentre.com/for-sale/land/lagos/shomolu/showtype?page=3) | 2026-09-26 |
+| Owode / Orile Bariga | ₦250,000/sqm | [Nigeria Property Centre](https://nigeriapropertycentre.com/for-sale/land/residential-land/lagos/shomolu/bariga/showtype) | 2026-09-26 |
+
+*Figure 2. Structured market dataset generated during Sprint 2.*
 
 ------------------------------------------------------------------------
 
@@ -212,13 +218,13 @@ Therefore:
 
 > **Indicative Market Level = the Sprint 2 price for that ward.**
 
-  Ward                     Indicative Market Level
-  ---------------------- -------------------------
-  Pedro / Gbagada                   ₦1,200,000/sqm
-  Aiyetoro / Mafowoku                 ₦420,000/sqm
-  Ibuowo / Owotutu                    ₦415,000/sqm
-  Ilaje                               ₦320,000/sqm
-  Owode / Orile Bariga                ₦250,000/sqm
+| Ward | Indicative Market Level |
+| --- | ---: |
+| Pedro / Gbagada | ₦1,200,000/sqm |
+| Aiyetoro / Mafowoku | ₦420,000/sqm |
+| Ibuowo / Owotutu | ₦415,000/sqm |
+| Ilaje | ₦320,000/sqm |
+| Owode / Orile Bariga | ₦250,000/sqm |
 
 Because `n = 1` for every ward, these values should **not** be described
 as statistically robust ward-level market averages.
@@ -241,7 +247,7 @@ other four observations.
 These are descriptive comparisons only and do not establish why the
 differences exist.
 
-📷 **IMAGE INDICATION --- Insert `indicative_market_levels.png` here**
+![Comparison chart of indicative land market levels across the five selected Bariga wards](data/sprint3_outputs/indicative_market_levels.png)
 
 *Suggested caption: Figure 3. Comparison of indicative land market
 levels across the five selected Bariga wards.*
@@ -274,8 +280,7 @@ The resulting map shows:
 -   Ilaje --- ₦320k/sqm
 -   Owode / Orile Bariga --- ₦250k/sqm
 
-📷 **IMAGE INDICATION --- Insert `bariga_market_intelligence_map.png`
-here**
+![Spatial distribution of indicative land market levels across the five selected Bariga wards](data/sprint3_outputs/bariga_market_intelligence_map.png)
 
 *Suggested caption: Figure 4. Spatial distribution of indicative land
 market levels across the five selected Bariga wards.*
@@ -291,10 +296,10 @@ median within each ward would not be meaningful.
 For the required experiment, I performed a hypothetical **+10%
 sensitivity test on Pedro / Gbagada**.
 
-  Scenario                    Overall mean   Overall median
-  ------------------------- -------------- ----------------
-  Base dataset                ₦521,000/sqm     ₦415,000/sqm
-  Hypothetical Pedro +10%     ₦545,000/sqm     ₦415,000/sqm
+| Scenario | Overall mean | Overall median |
+| --- | ---: | ---: |
+| Base dataset | ₦521,000/sqm | ₦415,000/sqm |
+| Hypothetical Pedro +10% | ₦545,000/sqm | ₦415,000/sqm |
 
 The experiment shows that changing one high observation can affect the
 overall mean while the median remains unchanged when the middle-ranked
