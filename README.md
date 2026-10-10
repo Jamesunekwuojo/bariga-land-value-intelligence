@@ -375,6 +375,11 @@ because its indicator was 100% in both years. Displayed changes are
 rounded from the underlying values, so subtracting displayed
 percentages can differ slightly.
 
+![Bar chart of NDBI-based Development Change from 2016 to 2026 across the five selected Bariga wards](data/sprint4_outputs/development_change_bar.png)
+
+*Figure 5. NDBI-based Development Change between 2016 and 2026 across
+the five selected Bariga wards.*
+
 These results describe the specified NDBI threshold method. A negative
 result does not by itself mean buildings were demolished or development
 declined. NDBI is a spectral proxy and can respond to surface materials,
