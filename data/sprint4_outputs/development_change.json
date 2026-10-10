@@ -1,0 +1,52 @@
+[
+  {
+    "Location":"Aiyetoro \/ Mafowoku",
+    "Earlier Year":2016,
+    "Earlier Development":100.0,
+    "Recent Year":2026,
+    "Recent Development":100.0,
+    "Development Change":0.0,
+    "Development Change Level":"Low",
+    "Notes":""
+  },
+  {
+    "Location":"Ibuowo \/ Owotutu",
+    "Earlier Year":2016,
+    "Earlier Development":96.53,
+    "Recent Year":2026,
+    "Recent Development":95.18,
+    "Development Change":-1.36,
+    "Development Change Level":"Low",
+    "Notes":""
+  },
+  {
+    "Location":"Ilaje",
+    "Earlier Year":2016,
+    "Earlier Development":93.62,
+    "Recent Year":2026,
+    "Recent Development":90.13,
+    "Development Change":-3.48,
+    "Development Change Level":"Low",
+    "Notes":""
+  },
+  {
+    "Location":"Owode  \/ Orile Bariga",
+    "Earlier Year":2016,
+    "Earlier Development":97.64,
+    "Recent Year":2026,
+    "Recent Development":91.79,
+    "Development Change":-5.86,
+    "Development Change Level":"Low",
+    "Notes":""
+  },
+  {
+    "Location":"Pedro \/ Gbagada",
+    "Earlier Year":2016,
+    "Earlier Development":83.28,
+    "Recent Year":2026,
+    "Recent Development":66.01,
+    "Development Change":-17.27,
+    "Development Change Level":"Low",
+    "Notes":""
+  }
+]

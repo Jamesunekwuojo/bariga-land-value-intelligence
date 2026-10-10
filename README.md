@@ -85,7 +85,7 @@ outside the study area.
 
 ![Map of the five selected ward polygons used as the technical-sprint study areas in Bariga LCDA](data/sprint3_outputs/study_areas_map.png)
 
-*Suggested caption: Figure 1. Five selected ward polygons used as the
+*Figure 1. Five selected ward polygons used as the
 technical-sprint study areas in Bariga LCDA.*
 
 ------------------------------------------------------------------------
@@ -249,7 +249,7 @@ differences exist.
 
 ![Comparison chart of indicative land market levels across the five selected Bariga wards](data/sprint3_outputs/indicative_market_levels.png)
 
-*Suggested caption: Figure 3. Comparison of indicative land market
+*Figure 3. Comparison of indicative land market
 levels across the five selected Bariga wards.*
 
 # 6. Unusual Observation --- Pedro / Gbagada
@@ -282,7 +282,7 @@ The resulting map shows:
 
 ![Spatial distribution of indicative land market levels across the five selected Bariga wards](data/sprint3_outputs/bariga_market_intelligence_map.png)
 
-*Suggested caption: Figure 4. Spatial distribution of indicative land
+*Figure 4. Spatial distribution of indicative land
 market levels across the five selected Bariga wards.*
 
 An interactive version is also produced as
@@ -339,34 +339,168 @@ change in Pedro / Gbagada's market price.
 8.  More listings per ward would improve the reliability of the market
     signal.
 
-# 10. Project Outputs
+# 10. From Satellite Imagery to Spatial Intelligence --- Sprint 4
+
+## 10.1 Objective and method
+
+Sprint 4 measured an NDBI-based development proxy for the same five
+wards using Landsat imagery for 2016 and 2026. The workflow used the
+supplied GeoRAD Google Colab / Google Earth Engine notebook. Its main
+settings were Landsat 8/9 Collection 2 Level-2 Surface Reflectance,
+metadata cloud cover below 40% with QA cloud/shadow masking, a 30-metre
+analysis scale and an NDBI threshold of 0.0.
+
+NDBI is the Normalized Difference Built-up Index. In this workflow,
+pixels with NDBI above 0.0 are counted as developed, and their share of
+each ward is the development measure. The calculation is:
+
+**Development Change = 2026 Development (%) − 2016 Development (%)**
+
+Change is reported in percentage points (pp), not relative percent. For
+example, a shift from 80% to 70% is −10 pp.
+
+## 10.2 Development Change results
+
+| Ward | 2016 Development | 2026 Development | Development Change |
+| --- | ---: | ---: | ---: |
+| Aiyetoro / Mafowuku | 100.00% | 100.00% | 0.00 pp |
+| Ibuowo / Owotutu | 96.53% | 95.18% | −1.36 pp |
+| Ilaje | 93.62% | 90.13% | −3.48 pp |
+| Owode / Orile Bariga | 97.64% | 91.79% | −5.86 pp |
+| Pedro / Gbagada | 83.28% | 66.01% | −17.27 pp |
+
+The largest decrease in the calculated indicator was Pedro / Gbagada
+(−17.27 pp). Aiyetoro / Mafowuku had no measured change in this output
+because its indicator was 100% in both years. Displayed changes are
+rounded from the underlying values, so subtracting displayed
+percentages can differ slightly.
+
+These results describe the specified NDBI threshold method. A negative
+result does not by itself mean buildings were demolished or development
+declined. NDBI is a spectral proxy and can respond to surface materials,
+moisture, vegetation, seasonal conditions, imagery availability and
+processing choices.
+
+## 10.3 Development Change indicator
+
+The supplied notebook classifies signed change as **Low** below 5 pp,
+**Average** from 5 to less than 15 pp, and **High** at 15 pp or more.
+Under its signed-change rules, all five results are labelled `Low`,
+including the negative changes. That label is the output of the
+provided threshold function; it does not mean all wards experienced a
+small change in magnitude. Pedro / Gbagada has the largest absolute
+change. These teaching thresholds are not a formal planning standard.
+
+## 10.4 NDBI threshold sensitivity experiment
+
+The main threshold of 0.0 was compared with a stricter threshold of
+`+0.05` and a more relaxed threshold of `−0.05`.
+
+| Ward | Threshold +0.05 | Threshold −0.05 |
+| --- | ---: | ---: |
+| Ibuowo / Owotutu | −3.09 pp | −1.70 pp |
+| Ilaje | −0.21 pp | +0.36 pp |
+| Pedro / Gbagada | −15.65 pp | −9.99 pp |
+| Aiyetoro / Mafowuku | −1.97 pp | 0.00 pp |
+| Owode / Orile Bariga | −8.16 pp | −3.63 pp |
+
+The threshold changes the estimated percentages and change values.
+Pedro / Gbagada remains the largest decrease under both alternatives,
+while Ilaje shifts from a small decrease to a small increase. This
+shows that small changes can be sensitive to the chosen threshold. The
+experiment does not establish which threshold is universally correct;
+the main result remains the 0.0 run.
+
+## 10.5 Additional temporal inspection
+
+The notebook also calculated a 2022 value as an intermediate point:
+
+| Ward | 2016 | 2022 | 2026 |
+| --- | ---: | ---: | ---: |
+| Ibuowo / Owotutu | 96.53% | 98.00% | 95.18% |
+| Ilaje | 93.62% | 93.89% | 90.13% |
+| Pedro / Gbagada | 83.28% | 84.30% | 66.01% |
+| Aiyetoro / Mafowuku | 100.00% | 100.00% | 100.00% |
+| Owode / Orile Bariga | 97.64% | 97.18% | 91.79% |
+
+The series is not always a steady decline. These intermediate values
+are a reason to inspect imagery and measurement conditions, not proof
+of a particular physical-development history.
+
+## 10.6 Limitations and quality-control notes
+
+1. The development measure is a thresholded NDBI proxy, not a direct
+   building count or formal land-use classification.
+2. Surface materials, moisture, vegetation, seasonal conditions,
+   clouds, sensor differences and image availability can affect results.
+3. The 2026 calendar year was incomplete when the analysis was run;
+   the composite reflects imagery available at run time, not a full-year
+   observation, limiting direct comparison with the full 2016 period.
+4. Aiyetoro / Mafowuku reached 100% in all three inspected years. This
+   upper-limit result should be validated; it can conceal differences
+   in underlying imagery.
+5. Signed-change classification places all negative changes in `Low`,
+   which may not represent magnitude independent of direction.
+6. The notebook's fallback for unavailable pixel statistics should be
+   reviewed before production use so missing measurements are not
+   interpreted as zero.
+7. The five wards are the study areas; findings should not be
+   generalized to all of Bariga or Lagos.
+8. Sprint 2 has one selected asking-price observation per ward. Market
+   data and the satellite proxy are different evidence and do not
+   establish a causal relationship.
+
+# 11. Combined Observations Across the Sprints
+
+The first four sprints produced two separate signals: one indicative
+asking-price observation per ward, carried forward as the Sprint 3
+Indicative Market Level, and observed change in the share of pixels
+above the NDBI threshold between the 2016 and 2026 imagery periods.
+
+Pedro / Gbagada has both the highest selected asking-price signal in
+Sprint 3 and the largest negative NDBI-based Development Change in the
+Sprint 4 main run. This is an observation across two different measures,
+not evidence that high land prices cause development change or that the
+satellite result explains the asking price. Both signals have
+limitations and require further validation.
+
+# 12. Project Outputs
 
 ### Spatial and market data
 
--   `bariga_selected_wards.geojson` --- five selected ward polygons
--   `market_dataset.csv` --- Sprint 2 market dataset
--   `market_intelligence.csv` --- final Sprint 3 market-intelligence
+-   [`bariga_selected_wards.geojson`](data/bariga_selected_wards.geojson) --- five selected ward polygons
+-   [`market_dataset.csv`](data/sprint2_outputs/market_dataset.csv) --- Sprint 2 market dataset
+-   [`market_intelligence.csv`](data/sprint3_outputs/market_intelligence.csv) --- final Sprint 3 market-intelligence
     dataset
--   `market_intelligence.json` --- JSON version of the final Sprint 3
+-   [`market_intelligence.json`](data/sprint3_outputs/market_intelligence.json) --- JSON version of the final Sprint 3
     dataset
--   `market_comparison.csv` --- market comparison statistics
--   `experiment_sensitivity.csv` --- Sprint 3 experiment
+-   [`market_comparison.csv`](data/sprint3_outputs/market_comparison.csv) --- market comparison statistics
+-   [`experiment_sensitivity.csv`](data/sprint3_outputs/experiment_sensitivity.csv) --- Sprint 3 experiment
 
 ### Maps and visual outputs
 
--   `study_areas_map.png` --- five-ward study-area map
--   `indicative_market_levels.png` --- market-level comparison chart
--   `bariga_market_intelligence_map.png` --- static spatial
+-   [`study_areas_map.png`](data/sprint3_outputs/study_areas_map.png) --- five-ward study-area map
+-   [`indicative_market_levels.png`](data/sprint3_outputs/indicative_market_levels.png) --- market-level comparison chart
+-   [`bariga_market_intelligence_map.png`](data/sprint3_outputs/bariga_market_intelligence_map.png) --- static spatial
     market-intelligence map
--   `bariga_market_intelligence_map.html` --- interactive
+-   [`bariga_market_intelligence_map.html`](data/sprint3_outputs/bariga_market_intelligence_map.html) --- interactive
     market-intelligence map
 
 ### Notebooks
 
 -   Sprint 2 market-data notebook
 -   Sprint 3 market-intelligence notebook
+-   [Sprint 4 satellite-imagery notebook](notebook/sprint4_bariga_satellite_imagery_to_spatial_intelligence%281%29.ipynb)
 
-# 11. Overall Learning
+### Sprint 4 outputs
+
+-   [`development_change.csv`](data/sprint4_outputs/development_change.csv) --- main Development Change dataset
+-   [`development_change.json`](data/sprint4_outputs/development_change.json) --- JSON version of the dataset
+-   [`development_change_bar.png`](data/sprint4_outputs/development_change_bar.png) --- Development Change chart
+-   [`development_change_map.html`](data/sprint4_outputs/development_change_map.html) --- interactive Development Change map
+-   [`towns_orientation_map.html`](data/sprint4_outputs/towns_orientation_map.html) --- study-area orientation map
+
+# 13. Overall Learning
 
 The first three sprints showed me that spatial analysis is not only
 about creating maps. The main challenge is connecting spatial features
@@ -384,13 +518,14 @@ Sprint 3 took the collected market observations and turned them into a
 spatial market-intelligence layer that can be inspected, compared and
 mapped.
 
-The next stage of the project will introduce the **five-year
-physical-development signal** so that the market layer can eventually be
-considered alongside observed development change.
+The next stage can bring these independent market and development
+signals together in the Land Intelligence product while preserving what
+each metric measures and its limitations.
 
-# 12. Reproducibility
+# 14. Reproducibility
 
-The Sprint 3 notebook is designed to run in Google Colab.
+The Sprint 3 and Sprint 4 notebooks are designed to run in Google
+Colab. Sprint 4 uses Google Earth Engine.
 
 To reproduce the analysis:
 
@@ -403,7 +538,8 @@ To reproduce the analysis:
 7.  Inspect the outlier check.
 8.  Review the market-level chart and maps.
 9.  Review the sensitivity experiment.
-10. Download the generated files from `sprint3_outputs/`.
+10. Download the generated market files from `sprint3_outputs/` and
+    Sprint 4 files from `sprint4_outputs/`.
 
 The notebook contains validation checks so that missing study areas,
 unexpected names, invalid prices or duplicate ward observations are
