@@ -507,7 +507,7 @@ limitations and require further validation.
 
 # 13. Overall Learning
 
-The first three sprints showed me that spatial analysis is not only
+The four sprints showed me that spatial analysis is not only
 about creating maps. The main challenge is connecting spatial features
 with reliable information and making sure that the information being
 compared actually refers to the same locations.
@@ -522,6 +522,12 @@ AI-assisted market searches.
 Sprint 3 took the collected market observations and turned them into a
 spatial market-intelligence layer that can be inspected, compared and
 mapped.
+
+Sprint 4 taught me to treat satellite-derived NDBI as a proxy rather
+than direct evidence of buildings being added or removed. Inspecting the
+imagery, testing alternative thresholds and accounting for incomplete
+2026 imagery helped show how processing choices and data conditions can
+affect the measured change.
 
 The next stage can bring these independent market and development
 signals together in the Land Intelligence product while preserving what
