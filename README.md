@@ -543,6 +543,9 @@ in the [`web-app/`](web-app/) directory and its
 The deployed application is available at
 [bariga-land-value-intelligence-web.vercel.app](https://bariga-land-value-intelligence-web.vercel.app/).
 
+A screencast walkthrough of the application is available as
+[Screencast From 2026-10-17](web-app/data/Screencast%20From%202026-10-17%2002-48-28.mp4).
+
 # 13. Overall Learning
 
 The four sprints showed me that spatial analysis is not only
