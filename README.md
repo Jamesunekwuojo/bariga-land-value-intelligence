@@ -545,9 +545,11 @@ The deployed application is available at
 
 A screencast walkthrough of the application:
 
-<video controls width="100%" src="web-app/data/Screencast%20From%202026-10-17%2002-48-28.mp4">
-  Your browser does not support embedded video. [Download the screencast](web-app/data/Screencast%20From%202026-10-17%2002-48-28.mp4).
-</video>
+
+
+https://github.com/user-attachments/assets/eca0aa7c-05e1-4467-83d6-d8f880cbf377
+
+
 
 # 13. Overall Learning
 
