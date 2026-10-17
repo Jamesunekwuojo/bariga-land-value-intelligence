@@ -2,7 +2,7 @@
   "app": {
     "name": "Bariga Land Intelligence",
     "purpose": "A small educational prototype that combines indicative land asking-price information with observed NDBI-based development measurements for five selected Bariga ward study areas.",
-    "builder": "Built by Unekwuojo as a GeoRAD Academy Emerging Spatial Professional mentorship project, using the GeoRAD Land Intelligence starter and the student's Sprint 1–4 outputs.",
+    "builder": "Built by Unekwuojo James as a GeoRAD Academy Emerging Spatial Professional mentorship project, using the GeoRAD Land Intelligence starter and the student's Sprint 1–4 outputs.",
     "study_area": "Five selected ward polygons associated with Bariga, Shomolu, Lagos: Ibuowo / Owotutu, Ilaje, Pedro / Gbagada, Aiyetoro / Mafowoku, and Owode / Orile Bariga.",
     "workflow": "Sprint 1 prepared ward polygons; Sprint 2 collected indicative asking-price evidence; Sprint 3 summarized the market signal; Sprint 4 used satellite imagery and an NDBI-based proxy to compare observed development measurements for 2016 and 2026; Sprint 5 integrates both signals in a searchable web map.",
     "features": [
