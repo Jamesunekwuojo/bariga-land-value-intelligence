@@ -540,6 +540,9 @@ The application source, data, and local run instructions are available
 in the [`web-app/`](web-app/) directory and its
 [`README`](web-app/README.md).
 
+The deployed application is available at
+[bariga-land-value-intelligence-web.vercel.app](https://bariga-land-value-intelligence-web.vercel.app/).
+
 # 13. Overall Learning
 
 The four sprints showed me that spatial analysis is not only
