@@ -1,0 +1,82 @@
+{
+  "app": {
+    "name": "Bariga Land Intelligence",
+    "purpose": "A small educational prototype that combines indicative land asking-price information with observed NDBI-based development measurements for five selected Bariga ward study areas.",
+    "builder": "Built by Unekwuojo as a GeoRAD Academy Emerging Spatial Professional mentorship project, using the GeoRAD Land Intelligence starter and the student's Sprint 1–4 outputs.",
+    "study_area": "Five selected ward polygons associated with Bariga, Shomolu, Lagos: Ibuowo / Owotutu, Ilaje, Pedro / Gbagada, Aiyetoro / Mafowoku, and Owode / Orile Bariga.",
+    "workflow": "Sprint 1 prepared ward polygons; Sprint 2 collected indicative asking-price evidence; Sprint 3 summarized the market signal; Sprint 4 used satellite imagery and an NDBI-based proxy to compare observed development measurements for 2016 and 2026; Sprint 5 integrates both signals in a searchable web map.",
+    "features": [
+      "Search a supported ward by its full name.",
+      "Select a ward from the location list or click its map marker/polygon.",
+      "View indicative market level, source and date searched.",
+      "View 2016 and 2026 development measurements, the calculated change and the supplied change level.",
+      "Switch between light and dark themes.",
+      "Ask this small local FAQ chatbot how to use the application and what its data means."
+    ],
+    "benefits": [
+      "Brings two different spatial signals together in one place.",
+      "Makes it easier to inspect differences between the five study wards.",
+      "Demonstrates a reproducible workflow from GIS data and analysis outputs to a usable web prototype.",
+      "Can support early exploration and discussion, but is not a property valuation or investment recommendation."
+    ],
+    "limitations": [
+      "Market prices are indicative asking-price values, not verified transaction prices or formal valuations.",
+      "There is only one market observation per ward in the provided market dataset; this is not enough to establish a robust market average or distribution.",
+      "NDBI is a built-up proxy and not a direct count of buildings. Negative changes do not automatically prove that buildings were removed.",
+      "The 2026 satellite comparison is year-to-date rather than a complete calendar year.",
+      "Aiyetoro / Mafowoku's 100% development measurement in both years needs further validation.",
+      "All five supplied development-change levels are Low under the current sprint methodology; interpret that categorical label cautiously.",
+      "This prototype only supports the five loaded wards. Other locations are outside its dataset."
+    ],
+    "how_to_use": [
+      "Type the full ward name in the search field and press Enter or click Search.",
+      "Choose a ward from the Locations list to focus the map and display its details.",
+      "Click a ward polygon or map marker to open its popup and details.",
+      "Use Reset view to clear the selection and show all five wards.",
+      "Use the sun/moon button to switch between light and dark mode.",
+      "Open the help/chat button at the lower-right corner and ask a question about the app."
+    ],
+    "faq": [
+      {
+        "q": "Who built this?",
+        "a": "This prototype was built by Abah James Unekwuojo for the GeoRAD Academy Emerging Spatial Professional mentorship, using the GeoRAD Land Intelligence starter and his Sprint 1–4 outputs."
+      },
+      {
+        "q": "What is Land Intelligence?",
+        "a": "It is a small map-based prototype that brings together an indicative land asking-price signal and an observed development-change signal for five selected Bariga wards."
+      },
+      {
+        "q": "How do I search for a ward?",
+        "a": "Enter the ward's full name in the search field and press Enter or select Search. You can also select a ward in the Locations list."
+      },
+      {
+        "q": "What does indicative market level mean?",
+        "a": "It is the selected asking-price figure per square metre used by the sprint workflow. It is indicative, based on the supplied listings, and should not be treated as a formal valuation or verified sale price."
+      },
+      {
+        "q": "What does Development Change mean?",
+        "a": "It is the difference between the notebook's measured development percentages for 2016 and 2026, expressed in percentage points. It describes the supplied analysis output, not a prediction of future development."
+      },
+      {
+        "q": "What is NDBI?",
+        "a": "NDBI is the Normalized Difference Built-up Index. In this project it is used as a proxy for built-up conditions, not as a direct count of buildings."
+      },
+      {
+        "q": "Why is the change negative?",
+        "a": "The supplied analysis calculates Recent Development minus Earlier Development. A negative value means the recent measured percentage is lower than the earlier value under this workflow. It does not, by itself, prove that buildings were removed."
+      },
+      {
+        "q": "Can I use this for a property purchase?",
+        "a": "No. It is an educational prototype with limited asking-price observations and satellite-derived proxy measurements. Verify any property and seek qualified valuation/legal advice before making decisions."
+      },
+      {
+        "q": "Why does a place show Town not available?",
+        "a": "The app currently contains only five supported ward records. Search using one of their full names. Other locations are outside the app's current dataset."
+      },
+      {
+        "q": "How was the project built?",
+        "a": "The work was split across sprints: QGIS/GeoJSON ward preparation, AI-assisted market-data collection, market-level summarization, a GeoRAD Google Earth Engine/Colab satellite workflow, then a JSON integration and Leaflet web map."
+      }
+    ]
+  }
+}

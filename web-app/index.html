@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f6f7f8" />
+  <meta name="description" content="A map-based land intelligence prototype for five Bariga wards, combining indicative asking prices and observed development change." />
+  <title>Bariga Land Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <aside class="workspace" aria-label="Land intelligence workspace">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Bariga Land Intelligence home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32"><path d="M4 23.5 12 7l5 10 4-6 7 12.5H4Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="21" cy="10" r="2.4" fill="currentColor"/></svg>
+          </span>
+          <span><strong>land<span>intel</span></strong><small>BARIGA · LAGOS</small></span>
+        </a>
+        <div class="topbar-actions">
+          <span class="live-indicator"><i></i> Prototype</span>
+          <button class="icon-button theme-toggle" id="theme-toggle" type="button" aria-label="Switch colour theme" title="Switch light/dark mode">
+            <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.6 8.6 0 1 0 20.9 13Z"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <section class="intro">
+        <p class="eyebrow">SPATIAL SIGNALS, IN ONE VIEW</p>
+        <h1>Know the land.<br><span>Read the change.</span></h1>
+        <p class="intro-copy">Explore indicative land asking prices alongside observed development change across five selected wards in Bariga.</p>
+      </section>
+
+      <section class="search-section" aria-label="Search locations">
+        <form id="search-form" class="search-box" role="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.2 4.2"/></svg>
+          <input id="search-input" type="search" placeholder="Search a ward..." autocomplete="off" aria-label="Search a ward">
+          <kbd>↵</kbd>
+          <button type="submit" class="search-submit">Search</button>
+        </form>
+        <p id="status" class="status" role="status" aria-live="polite">Loading ward intelligence…</p>
+        <div id="suggestions" class="suggestions" hidden></div>
+      </section>
+
+      <section class="location-section">
+        <div class="section-heading">
+          <div><p class="eyebrow">YOUR STUDY AREAS</p><h2>Locations <span id="location-count" class="count-pill">—</span></h2></div>
+          <button id="reset-view" class="quiet-button" type="button">Reset view <span aria-hidden="true">↗</span></button>
+        </div>
+        <div id="town-list" class="town-list"></div>
+      </section>
+
+      <section class="detail-section" aria-label="Selected ward intelligence">
+        <div class="section-heading detail-title-row">
+          <div><p class="eyebrow">LOCATION BRIEF</p><h2 id="detail-title">Select a ward</h2></div>
+          <span id="selected-dot" class="selected-dot" hidden></span>
+        </div>
+        <div id="details" class="details-empty">
+          <span class="empty-symbol" aria-hidden="true">⌖</span>
+          <p>Select a ward from the list or map to see its intelligence.</p>
+        </div>
+      </section>
+
+      <footer class="sidebar-footer">
+        <span>Built for GeoRAD Academy mentorship</span>
+        <button type="button" id="about-button">About this project ↗</button>
+      </footer>
+    </aside>
+
+    <section class="map-stage" aria-label="Interactive map">
+      <div class="map-topline">
+        <div class="map-label"><span class="map-pulse"></span><span>BARIGA, SHOMOLU</span></div>
+        <div class="map-controls">
+          <button id="fit-map" class="map-control" type="button" title="Show all five wards" aria-label="Show all five wards">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5M8 8l-5-5m13 5 5-5M8 16l-5 5m13-5 5 5"/></svg>
+            <span>Overview</span>
+          </button>
+        </div>
+      </div>
+      <div id="map" aria-label="Map of five Bariga ward study areas"></div>
+      <div class="map-legend">
+        <span class="legend-label">INDICATIVE MARKET LEVEL</span>
+        <div class="legend-scale"><i></i><i></i><i></i><i></i></div>
+        <div class="legend-values"><span>₦250k</span><span>₦1.2m / sqm</span></div>
+        <p>Higher values use a deeper map colour. Select a ward for details.</p>
+      </div>
+      <div class="map-credit">Map tiles © Esri · Ward boundaries from supplied GRID3/INEC-derived GeoJSON</div>
+    </section>
+  </main>
+
+  <button id="chat-launcher" class="chat-launcher" type="button" aria-label="Open Land Intelligence help chat" aria-expanded="false">
+    <svg class="chat-open-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l1.8-3.4A7.5 7.5 0 1 1 20 11.5Z"/><path d="M8.5 11.5h7m-7-3h4"/></svg>
+    <svg class="chat-close-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+    <span class="launcher-label">Ask LandIntel</span>
+  </button>
+
+  <section id="chat-panel" class="chat-panel" aria-label="Land Intelligence help assistant" hidden>
+    <header class="chat-header">
+      <div class="bot-avatar">LI</div>
+      <div><strong>LandIntel Guide</strong><small><i></i> Project help · limited domain</small></div>
+      <button id="chat-close" class="icon-button chat-close" type="button" aria-label="Close chat">×</button>
+    </header>
+    <div class="chat-context"><span class="sparkle">✦</span> Ask about the map, project, data or how to use this tool.</div>
+    <div id="chat-messages" class="chat-messages" aria-live="polite">
+      <div class="chat-message bot">Hi! I can explain how to use Land Intelligence, what the indicators mean, and how this project was built. What would you like to know?</div>
+    </div>
+    <div class="quick-questions">
+      <button type="button" data-question="How do I use the map?">How to use it</button>
+      <button type="button" data-question="What does development change mean?">Development change</button>
+      <button type="button" data-question="Who built this project?">Who built it?</button>
+    </div>
+    <form id="chat-form" class="chat-input-row">
+      <input id="chat-input" type="text" placeholder="Ask a project question…" autocomplete="off" aria-label="Ask a question about Land Intelligence">
+      <button type="submit" aria-label="Send question">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 3-7.5 18-3.8-7.7L2 9.5 21 3Z"/><path d="M9.7 13.3 21 3"/></svg>
+      </button>
+    </form>
+    <p class="chat-disclaimer">Answers are based on a small local project knowledge file, not a general-purpose AI model.</p>
+  </section>
+
+  <dialog id="about-dialog" class="about-dialog">
+    <div class="dialog-head"><div><p class="eyebrow">ABOUT THE PROTOTYPE</p><h2>Land intelligence, made inspectable.</h2></div><button id="about-close" class="icon-button" type="button" aria-label="Close about dialog">×</button></div>
+    <p>This educational prototype combines indicative land asking-price evidence with observed development measurements for five selected wards in Bariga, Lagos.</p>
+    <p>It was built by Abah James Unekwuojo as part of the GeoRAD Academy Emerging Spatial Professional mentorship, using the GeoRAD starter and outputs from Sprints 1–4.</p>
+    <div class="dialog-note"><strong>Use with care.</strong> Market levels are not formal valuations. NDBI is a proxy for built-up conditions, not a direct building count. The results should be checked before being used for real property decisions.</div>
+  </dialog>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="./app.js" defer></script>
+</body>
+</html>

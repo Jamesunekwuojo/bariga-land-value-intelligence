@@ -505,6 +505,41 @@ limitations and require further validation.
 -   [`development_change_map.html`](data/sprint4_outputs/development_change_map.html) --- interactive Development Change map
 -   [`towns_orientation_map.html`](data/sprint4_outputs/towns_orientation_map.html) --- study-area orientation map
 
+
+### Sprint 5: Web-Based Land Intelligence App
+
+Sprint 5 brought the outputs of the earlier sprints together in a
+browser-based interactive application. The app combines the selected
+ward boundaries from Sprint 1, the indicative market information
+collected in Sprint 2 and mapped in Sprint 3, and the NDBI-based
+Development Change results from Sprint 4. It presents the two main
+signals side by side: indicative land asking prices and observed
+development change across the five selected wards in Bariga.
+
+The prototype was built with HTML, CSS and JavaScript. It includes a
+Leaflet map with selectable ward polygons, search by ward name, a
+location brief with market and development details, light and dark
+themes, and a small FAQ assistant with curated project answers. The
+application reads its integrated records from
+[`web-app/data/land-intelligence.json`](web-app/data/land-intelligence.json)
+and keeps the source files from the earlier sprints under
+[`web-app/data/previous-sprints/`](web-app/data/previous-sprints/).
+
+The app is an educational prototype for exploring the project outputs.
+It does not provide live market updates or formal property valuations.
+Market observations remain indicative asking-price signals, while
+Development Change remains an NDBI-based proxy that should be
+interpreted with the Sprint 4 limitations in mind.
+
+Sprint 5 demonstrates how the spatial and analytical outputs from the
+previous sprints can be presented together in an accessible interface.
+It does not establish a causal relationship between asking prices and
+measured development change.
+
+The application source, data, and local run instructions are available
+in the [`web-app/`](web-app/) directory and its
+[`README`](web-app/README.md).
+
 # 13. Overall Learning
 
 The four sprints showed me that spatial analysis is not only
@@ -529,9 +564,10 @@ imagery, testing alternative thresholds and accounting for incomplete
 2026 imagery helped show how processing choices and data conditions can
 affect the measured change.
 
-The next stage can bring these independent market and development
-signals together in the Land Intelligence product while preserving what
-each metric measures and its limitations.
+Sprint 5 showed how outputs from the previous sprints can be combined
+in an interactive web application. Building the interface also made it
+important to keep each indicator's source and limitations clear while
+presenting them together.
 
 # 14. Reproducibility
 
