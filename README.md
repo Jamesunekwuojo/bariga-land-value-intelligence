@@ -543,8 +543,11 @@ in the [`web-app/`](web-app/) directory and its
 The deployed application is available at
 [bariga-land-value-intelligence-web.vercel.app](https://bariga-land-value-intelligence-web.vercel.app/).
 
-A screencast walkthrough of the application is available as
-[Screencast From 2026-10-17](web-app/data/Screencast%20From%202026-10-17%2002-48-28.mp4).
+A screencast walkthrough of the application:
+
+<video controls width="100%" src="web-app/data/Screencast%20From%202026-10-17%2002-48-28.mp4">
+  Your browser does not support embedded video. [Download the screencast](web-app/data/Screencast%20From%202026-10-17%2002-48-28.mp4).
+</video>
 
 # 13. Overall Learning
 
